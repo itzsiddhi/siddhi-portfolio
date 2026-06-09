@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
-import photo from '..assets/IMG-20241223-WA0038.jpg';
+import photo1 from '../assets/Gemini_Generated_Image_wt1v4mwt1v4mwt1v.png';
 
-const PHOTOS = [photo];
 
 const PILL_TAGS = [
   'B.Tech · M S Ramaiah · 2027',
@@ -55,117 +54,59 @@ function StatBlock({ value, label, delay, suffix = '' }: StatProps) {
 
 // ── Photo Carousel ───────────────────────────────
 function PhotoCarousel() {
-  const [current, setCurrent] = useState(0);
-  const [direction, setDirection] = useState(1);
-
-  const goTo = (idx: number) => {
-    setDirection(idx > current ? 1 : -1);
-    setCurrent(idx);
-  };
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setDirection(1);
-      setCurrent(prev => (prev + 1) % PHOTOS.length);
-    }, 3000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const variants = {
-    enter: (dir: number) => ({ opacity: 0, x: dir * 30 }),
-    center: { opacity: 1, x: 0 },
-    exit: (dir: number) => ({ opacity: 0, x: dir * -30 }),
-  };
-
   return (
-    <div className="relative w-full flex flex-col items-center gap-4">
-      {/* Image frame */}
+    <div className="relative w-full flex flex-col items-center justify-center py-8">
+      
+      {/* Outer holographic glow ring */}
       <div
-        className="relative w-full overflow-hidden rounded-xl"
         style={{
-          aspectRatio: '3/4',
-          maxHeight: '520px',
-          background: '#0a0a12',
+          width: '280px',
+          height: '280px',
+          borderRadius: '50%',
+          padding: '3px',
+          background: 'linear-gradient(135deg, #a78bfa, #60a5fa, #34d399, #f472b6, #a78bfa)',
+          backgroundSize: '300% 300%',
+          animation: 'holoBorder 4s linear infinite',
+          boxShadow: '0 0 30px rgba(167,139,250,0.4), 0 0 60px rgba(96,165,250,0.2)',
         }}
       >
-        {/* Holographic border wrapper */}
+        {/* Inner circle */}
         <div
-          className="absolute inset-0 rounded-xl -z-10"
           style={{
-            background: 'linear-gradient(135deg, #a78bfa, #60a5fa, #34d399, #f472b6, #a78bfa)',
-            backgroundSize: '300% 300%',
-            animation: 'holoBorder 6s linear infinite',
-            padding: '1.5px',
+            width: '100%',
+            height: '100%',
+            borderRadius: '50%',
+            overflow: 'hidden',
+            background: '#0a0a12',
+            border: '3px solid #000008',
           }}
-        />
-        <div
-          className="absolute inset-[1.5px] rounded-xl overflow-hidden"
-          style={{ background: '#0a0a12' }}
         >
-          <AnimatePresence initial={false} custom={direction} mode="wait">
-            <motion.img
-              key={current}
-              src={PHOTOS[current]}
-              alt={`Siddhi Tiwari ${current + 1}`}
-              custom={direction}
-              variants={variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              className="w-full h-full object-cover object-center"
-              style={{ objectPosition: 'center 15%' }}
-              draggable={false}
-            />
-          </AnimatePresence>
-
-          {/* Breathing glow overlay */}
-          <div
-            className="absolute inset-0 pointer-events-none animate-pulse-glow"
+          <img
+            src={photo1}
+            alt="Siddhi Tiwari"
             style={{
-              background: 'radial-gradient(ellipse at 50% 100%, rgba(167,139,250,0.12) 0%, transparent 70%)',
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center 5%',
             }}
+            draggable={false}
           />
         </div>
-
-        {/* Prev/Next arrows — visible on hover */}
-        <button
-          onClick={() => goTo((current - 1 + PHOTOS.length) % PHOTOS.length)}
-          className="absolute left-2 top-1/2 -translate-y-1/2 opacity-0 hover:opacity-100 group-hover:opacity-60 w-8 h-8 flex items-center justify-center rounded-full transition-all duration-200 z-10"
-          style={{ background: 'rgba(0,0,8,0.7)', border: '1px solid rgba(167,139,250,0.3)' }}
-          aria-label="Previous"
-        >
-          <span style={{ color: '#a78bfa', fontSize: '14px' }}>‹</span>
-        </button>
-        <button
-          onClick={() => goTo((current + 1) % PHOTOS.length)}
-          className="absolute right-2 top-1/2 -translate-y-1/2 opacity-0 hover:opacity-100 group-hover:opacity-60 w-8 h-8 flex items-center justify-center rounded-full transition-all duration-200 z-10"
-          style={{ background: 'rgba(0,0,8,0.7)', border: '1px solid rgba(167,139,250,0.3)' }}
-          aria-label="Next"
-        >
-          <span style={{ color: '#a78bfa', fontSize: '14px' }}>›</span>
-        </button>
       </div>
 
-      {/* Dots */}
-      <div className="flex items-center gap-2">
-        {PHOTOS.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => goTo(i)}
-            className="rounded-full transition-all duration-300 flex-shrink-0"
-            style={{
-              width: i === current ? '8px' : '6px',
-              height: i === current ? '8px' : '6px',
-              background: i === current
-                ? 'linear-gradient(135deg, #a78bfa, #60a5fa)'
-                : 'rgba(107,114,128,0.5)',
-              boxShadow: i === current ? '0 0 8px rgba(167,139,250,0.6)' : 'none',
-            }}
-            aria-label={`Photo ${i + 1}`}
-          />
-        ))}
-      </div>
+      {/* Subtle pulse ring behind */}
+      <div
+        className="absolute animate-ping"
+        style={{
+          width: '290px',
+          height: '290px',
+          borderRadius: '50%',
+          border: '1px solid rgba(167,139,250,0.15)',
+          animationDuration: '3s',
+        }}
+      />
+
     </div>
   );
 }
