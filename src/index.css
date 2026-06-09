@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --holo-gradient: linear-gradient(135deg, #a78bfa 0%, #60a5fa 25%, #34d399 50%, #f472b6 75%, #a78bfa 100%);
+  --holo-gradient-soft: linear-gradient(135deg, rgba(167,139,250,0.6) 0%, rgba(96,165,250,0.6) 33%, rgba(52,211,153,0.6) 66%, rgba(244,114,182,0.6) 100%);
+  --space-black: #000008;
+  --space-deep: #0a0a12;
+  --space-panel: #0d0d1a;
+  --space-border: #1a1a2e;
+  --text-primary: #f0f0ff;
+  --text-secondary: #6b7280;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: #000008;
+  color: #f0f0ff;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #000008; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #a78bfa, #60a5fa);
+  border-radius: 2px;
+}
+
+/* Holographic text utility */
+.holo-text {
+  background: linear-gradient(135deg, #a78bfa 0%, #60a5fa 20%, #34d399 45%, #f472b6 70%, #a78bfa 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: holoShimmer 5s linear infinite;
+}
+
+/* Holographic border */
+.holo-border {
+  position: relative;
+}
+
+.holo-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(135deg, #a78bfa, #60a5fa, #34d399, #f472b6, #a78bfa);
+  background-size: 300% 300%;
+  border-radius: inherit;
+  z-index: -1;
+  animation: holoBorder 6s linear infinite;
+  opacity: 0.7;
+}
+
+/* Glass panel */
+.glass-panel {
+  background: rgba(13, 13, 26, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(26, 26, 46, 0.8);
+}
+
+/* Holo button */
+.holo-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.holo-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(167,139,250,0.15), rgba(96,165,250,0.15), rgba(52,211,153,0.15), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.holo-btn:hover::after {
+  transform: translateX(100%);
+}
+
+/* Section fade in for non-Framer elements */
+.section-fade {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.section-fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hide default cursor on desktop */
+@media (pointer: fine) {
+  * { cursor: none !important; }
+}
+
+/* Formula drift elements */
+.formula-drift {
+  position: absolute;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: rgba(167, 139, 250, 0.06);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
