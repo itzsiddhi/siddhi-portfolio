@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
-import photo2 from '../assets/IMG20251126101246.jpg';
-import photo3 from '../assets/IMG20251222212634.jpg';
+import photo from '..assets/IMG-20241223-WA0038.jpg';
 
-const PHOTOS = [photo2, photo3];
+const PHOTOS = [photo];
 
 const PILL_TAGS = [
   'B.Tech · M S Ramaiah · 2027',
