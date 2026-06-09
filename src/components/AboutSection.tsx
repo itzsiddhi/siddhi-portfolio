@@ -162,11 +162,11 @@ export default function AboutSection() {
             {/* Stats */}
             <motion.div
               variants={itemVariants}
-              className="grid grid-cols-2 sm:grid-cols-4 gap-6 pb-8 border-b"
+              className="grid grid-cols-3 gap-6 pb-8 border-b"
               style={{ borderColor: 'rgba(26,26,46,0.8)' }}
             >
               <StatBlock value={8} label="Projects Shipped" delay={0} />
-              <StatBlock value={1} label="Founder · Xhalee" delay={0.08} suffix="" />
+              <StatBlock value={1} label="Founder · Xhalee" delay={0.08} />
               <StatBlock value={8.3} label="GPA · B.Tech EEE" delay={0.16} />
             </motion.div>
 
